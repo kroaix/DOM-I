@@ -38,73 +38,66 @@ const siteContent = {
 };
 
 // NAV
+
 let topNav = document.querySelectorAll("nav a");
-
-topNav[0].textContent = siteContent["nav"]["nav-item-1"];
-topNav[1].textContent = siteContent["nav"]["nav-item-2"];
-topNav[2].textContent = siteContent["nav"]["nav-item-3"];
-topNav[3].textContent = siteContent["nav"]["nav-item-4"];
-topNav[4].textContent = siteContent["nav"]["nav-item-5"];
-topNav[5].textContent = siteContent["nav"]["nav-item-6"];
-
-topNav.forEach((item) => {
+topNav.forEach((item, i) => {
+  item.textContent = siteContent["nav"][`nav-item-${i + 1}`];
   item.style.color = "green";
 });
 
 let nav = document.querySelector("nav");
-let homeLink = document.createElement("a");
-let blogLink = document.createElement("a");
+let newLinks = ["Home", "Blog"];
+newLinks.forEach(link => {
+  let newLink = document.createElement("a");
+  newLink.setAttribute('href', "#");
+  newLink.style.color = "green";
+  if (link === "Blog") {
+    newLink.textContent = "Blog";
+    nav.appendChild(newLink);
+  } else if (link === "Home") {
+    newLink.textContent = "Home";
+    nav.prepend(newLink);
+  };
+});
 
-blogLink.textContent = "Blog";
-blogLink.setAttribute('href', "#");
-blogLink.style.color = "green";
-
-homeLink.textContent = "Home";
-homeLink.setAttribute('href', "#");
-homeLink.style.color = "green";
-
-nav.appendChild(blogLink);
-nav.prepend(homeLink);
-
+// IMAGES
 let logo = document.getElementById("logo-img");
 logo.setAttribute('src', siteContent["nav"]["img-src"]);
+
+let midImg = document.getElementById("middle-img");
+midImg.setAttribute('src', siteContent["main-content"]["middle-img-src"]);
+
+let ctaImg = document.getElementById("cta-img");
+ctaImg.setAttribute('src', siteContent["cta"]["img-src"]);
 
 // CTA 
 let ctaHeader = document.querySelector(".cta-text h1");
 ctaHeader.innerHTML = siteContent['cta']['h1'];
 
-let ctaImg = document.getElementById("cta-img");
-ctaImg.setAttribute('src', siteContent["cta"]["img-src"]);
-
 let ctaButton = document.querySelector(".cta-text button");
 ctaButton.textContent = siteContent['cta']['button'];
 
 // MAIN CONTENT
-let pageContentH4 = document.querySelectorAll(".top-content .text-content h4, .bottom-content .text-content h4");
-pageContentH4[0].textContent = siteContent["main-content"]["features-h4"];
-pageContentH4[1].textContent = siteContent["main-content"]["about-h4"];
-pageContentH4[2].textContent = siteContent["main-content"]["services-h4"];
-pageContentH4[3].textContent = siteContent["main-content"]["product-h4"];
-pageContentH4[4].textContent = siteContent["main-content"]["vision-h4"];
+let htmlH4 = document.querySelectorAll(".text-content h4");
+let jsH4 = Array.from(Object.keys(siteContent["main-content"]).filter(item => item.includes("h4")));
+let htmlP = document.querySelectorAll(".text-content p");
+let jsP = Array.from(Object.keys(siteContent["main-content"]).filter(item => item.includes("content")));
 
-let midImg = document.getElementById("middle-img");
-midImg.setAttribute('src', siteContent["main-content"]["middle-img-src"]);
-
-let pageContentP = document.querySelectorAll(".top-content .text-content p, .bottom-content .text-content p");
-pageContentP[0].textContent = siteContent["main-content"]["features-content"]; 
-pageContentP[1].textContent = siteContent["main-content"]["about-content"]; 
-pageContentP[2].textContent = siteContent["main-content"]["services-content"]; 
-pageContentP[3].textContent = siteContent["main-content"]["product-content"]; 
-pageContentP[4].textContent = siteContent["main-content"]["vision-content"];
+for(let i = 0; i < jsH4.length; i++){
+  htmlH4[i].textContent = siteContent["main-content"][jsH4[i]];
+  htmlP[i].textContent = siteContent["main-content"][jsP[i]];
+};
 
 // CONTACT
 let contactH4 = document.querySelector(".contact h4");
 contactH4.textContent = siteContent["contact"]["contact-h4"];
 
 let contactP = document.querySelectorAll(".contact p");
-contactP[0].innerHTML = siteContent["contact"]["address"];
-contactP[1].textContent = siteContent["contact"]["phone"];
-contactP[2].textContent = siteContent["contact"]["email"];
+let contactJS = Array.from(Object.values(siteContent["contact"]).splice(1, 3));
+
+contactP.forEach((element, i) => {
+  element.innerHTML = contactJS[i];
+});
 
 // FOOTER
 let footerP = document.querySelector("footer p");
