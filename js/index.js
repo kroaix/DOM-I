@@ -26,6 +26,9 @@ const siteContent = {
     "vision-h4":"Vision",
     "vision-content": "Vision content elementum magna eros, ac posuere elvit tempus et. Suspendisse vel tempus odio, in interdutm nisi. Suspendisse eu ornare nisl. Nullam convallis augue justo, at imperdiet metus scelerisque quis.",
   },
+  "stretch": {
+    "button" : "Click Here"
+  },
   "contact": {
     "contact-h4" : "Contact",
     "address" : "123 Way 456 Street <br/> Somewhere, USA",
@@ -42,15 +45,16 @@ const siteContent = {
 let topNav = document.querySelectorAll("nav a");
 topNav.forEach((item, i) => {
   item.textContent = siteContent["nav"][`nav-item-${i + 1}`];
-  item.style.color = "green";
+  item.style.color = "SteelBlue";
 });
 
 let nav = document.querySelector("nav");
 let newLinks = ["Home", "Blog"];
+
 newLinks.forEach(link => {
   let newLink = document.createElement("a");
   newLink.setAttribute('href', "#");
-  newLink.style.color = "green";
+  newLink.style.color = "SteelBlue";
   if (link === "Blog") {
     newLink.textContent = "Blog";
     nav.appendChild(newLink);
@@ -59,6 +63,23 @@ newLinks.forEach(link => {
     nav.prepend(newLink);
   };
 });
+
+let links = document.querySelectorAll("a");
+
+links.forEach(link => {
+  link.addEventListener("mouseenter", (event) => {
+    event.target.style.color = "#568ebd";
+  });
+  link.addEventListener("mouseleave", (event) => {
+    event.target.style.color = "#4682b4";
+  });
+  link.style.textDecoration = "none";
+});
+
+let header = document.querySelector("header");
+header.style.padding = "20px";
+header.style.backgroundColor = "AliceBlue";
+
 
 // IMAGES
 let logo = document.getElementById("logo-img");
@@ -88,6 +109,10 @@ for(let i = 0; i < jsH4.length; i++){
   htmlP[i].textContent = siteContent["main-content"][jsP[i]];
 };
 
+// NEW BUTTON
+
+
+
 // CONTACT
 let contactH4 = document.querySelector(".contact h4");
 contactH4.textContent = siteContent["contact"]["contact-h4"];
@@ -102,3 +127,10 @@ contactP.forEach((element, i) => {
 // FOOTER
 let footerP = document.querySelector("footer p");
 footerP.textContent = siteContent["footer"]["copyright"];
+
+let footer = document.querySelector("footer");
+footer.style.backgroundColor = "AliceBlue";
+footer.style.color = "SteelBlue";
+footer.style.height = "50px";
+footer.style.marginBottom = "0";
+footer.style.padding = "40px";
